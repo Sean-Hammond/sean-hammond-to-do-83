@@ -16,10 +16,10 @@ const Home = () => {
     setNewTask("");
   }
 
-  // Delete a specific task
-  const deleteTask = (taskToDelete) => {
-    const filteredTasks = tasks.filter((taskData) => taskData != taskToDelete);
-    setTasks(filteredTasks);
+  const deleteTask = (indexToDelete) => {
+    setTasks(tasks.toSpliced(indexToDelete, 1));
+    console.log("Index being deleted:", indexToDelete);
+    console.log("All tasks left after deletion:", tasks);
   };
 
   // User can input text in a field and click button or press enter to add typed task to tasks array
@@ -63,8 +63,7 @@ const Home = () => {
                 {item}
                 <button
                   onClick={() => {
-                    // Delete a selected task
-                    deleteTask(item);
+                    deleteTask(index);
                   }}
                 >
                   X

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Task } from "./Task";
 
 // TO DO LIST WEB APPLICATION
 const Home = () => {
@@ -19,7 +20,6 @@ const Home = () => {
   const deleteTask = (indexToDelete) => {
     setTasks(tasks.toSpliced(indexToDelete, 1));
     console.log("Index being deleted:", indexToDelete);
-    console.log("All tasks left after deletion:", tasks);
   };
 
   // User can input text in a field and click button or press enter to add typed task to tasks array
@@ -55,23 +55,15 @@ const Home = () => {
         Add task
       </button>
       <ul>
-        {
-          // Print each task as a li
-          tasks.map((item, index) => {
-            return (
-              <li key={index + "task"}>
-                {item}
-                <button
-                  onClick={() => {
-                    deleteTask(index);
-                  }}
-                >
-                  X
-                </button>
-              </li>
-            );
-          })
-        }
+        {tasks.map((item, index) => {
+          console.log("item:", item);
+          console.log("index:", index);
+          return (
+            <li key={index + "task"}>
+              <Task taskItem={item} taskIndex={index} deleteTask={deleteTask} />
+            </li>
+          );
+        })}
         {
           // Message if there are no tasks
           tasks.length == 0 && <li className="text-success">All clear!</li>
